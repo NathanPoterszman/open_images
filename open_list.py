@@ -8,6 +8,14 @@ from skimage import io
 
 # open a list of images in a given folder 
 
+def OpenFile (filename)
+	### 
+	#open an image file and put the channels in first
+	###
+	img =  io.imread(filename) #open image with a numpy array
+	img = np.rollaxis(img, 3) #put channels first
+	return 
+
 folder = input("folder to reach:")
 os.chdir(folder) #change the working directory
 i = 0
@@ -16,8 +24,7 @@ for file in L:
 	print ('file number', i)
 	ext = os.path.splitext(file)[1] #separate the file name in file + ext and keep ext
 	if ext == '.tif': 
-		img =  io.imread(file) #open image with a numpy array
-		img = np.rollaxis(img, 3) #put channels first
+		OpenFile (file)
 		print(L[i], 'is an image')
 		print (img.shape) #give the shape of the array (channels, z, x, y)
 	else:
